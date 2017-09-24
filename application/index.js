@@ -48,6 +48,14 @@ function materialPathFilter(path) {
     const toRemoveList = [/mymaterial.module.ts/];
     return !toRemoveList.some(re => re.test(path));
 }
+function ssrPathFilter(path) {
+    const toRemoveList = [/render-page.js/, /tsconfig.server.json/, /main.server.ts/];
+    return !toRemoveList.some(re => re.test(path));
+}
+function ssrPathOtherFilter(path) {
+    const toRemoveList = [/app.server.module.ts/];
+    return !toRemoveList.some(re => re.test(path));
+}
 function default_1(options) {
     return (host, context) => {
         const appRootSelector = `${options.prefix}-root`;
@@ -68,6 +76,7 @@ function default_1(options) {
         return schematics_1.chain([
             schematics_1.mergeWith(schematics_1.apply(schematics_1.url('./files'), [
                 options.minimal ? schematics_1.filter(minimalPathFilter) : schematics_1.noop(),
+                !options.ssr ? schematics_1.filter(ssrPathFilter) : schematics_1.noop(),
                 schematics_1.template(Object.assign({ utils: stringUtils, 'dot': '.' }, options)),
                 schematics_1.move(options.directory),
             ])),
@@ -86,6 +95,7 @@ function default_1(options) {
                 componentOptions.inlineTemplate ? schematics_1.filter(path => !path.endsWith('.html')) : schematics_1.noop(),
                 !componentOptions.spec ? schematics_1.filter(path => !path.endsWith('.spec.ts')) : schematics_1.noop(),
                 !options.material ? schematics_1.filter(materialPathFilter) : schematics_1.noop(),
+		!options.ssr ? schematics_1.filter(ssrPathOtherFilter) : schematics_1.noop(),
                 schematics_1.template(Object.assign({ utils: stringUtils }, options, { selector: appRootSelector }, componentOptions)),
                 schematics_1.move(options.directory + '/' + sourceDir + '/app'),
             ]), schematics_1.MergeStrategy.Overwrite),

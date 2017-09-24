@@ -12,7 +12,7 @@ import { MyMaterialModule } from './mymaterial.module';<% } %>
     AppComponent
   ],
   imports: [
-    BrowserModule<% if (material) { %>,
+    BrowserModule<% if (ssr) { %>.withServerTransition({appId: '<%= utils.dasherize(name) %>-app'})<% } %><% if (material) { %>,
     BrowserAnimationsModule,
     MyMaterialModule<% } %><% if (routing) { %>,
     AppRoutingModule<% } %>

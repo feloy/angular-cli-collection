@@ -85,6 +85,11 @@
       "enum": ["deeppurple-amber", "indigo-pink", "pink-bluegrey", "purple-green"],
       "type": "string",
       "default": "indigo-pink"
+    },
+    "ssr": {
+      "description": "Add support for server-side rendering.",
+      "type": "boolean",
+      "default": false
     }
   },
   "required": [
