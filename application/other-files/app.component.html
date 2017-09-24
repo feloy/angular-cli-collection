@@ -18,8 +18,9 @@
   </li>
 </ul>
 
+<% if (material) { %>
 <button md-button color="warn">Hello World!</button>
-<md-icon>language</md-icon>
+<md-icon>language</md-icon><% } %>
 
 <% if (routing) { %>
 <router-outlet></router-outlet><% } %>

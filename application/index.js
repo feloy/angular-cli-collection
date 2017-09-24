@@ -44,6 +44,10 @@ function minimalPathFilter(path) {
         /tslint.json/, /favicon.ico/];
     return !toRemoveList.some(re => re.test(path));
 }
+function materialPathFilter(path) {
+    const toRemoveList = [/mymaterial.module.ts/];
+    return !toRemoveList.some(re => re.test(path));
+}
 function default_1(options) {
     return (host, context) => {
         const appRootSelector = `${options.prefix}-root`;
@@ -81,6 +85,7 @@ function default_1(options) {
             schematics_1.mergeWith(schematics_1.apply(schematics_1.url('./other-files'), [
                 componentOptions.inlineTemplate ? schematics_1.filter(path => !path.endsWith('.html')) : schematics_1.noop(),
                 !componentOptions.spec ? schematics_1.filter(path => !path.endsWith('.spec.ts')) : schematics_1.noop(),
+                !options.material ? schematics_1.filter(materialPathFilter) : schematics_1.noop(),
                 schematics_1.template(Object.assign({ utils: stringUtils }, options, { selector: appRootSelector }, componentOptions)),
                 schematics_1.move(options.directory + '/' + sourceDir + '/app'),
             ]), schematics_1.MergeStrategy.Overwrite),

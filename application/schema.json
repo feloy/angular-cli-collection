@@ -73,6 +73,11 @@
       "description": "Should create a minimal app.",
       "type": "boolean",
       "default": false
+    },
+    "material": {
+      "description": "Should add Material design support.",
+      "type": "boolean",
+      "default": false
     }
   },
   "required": [
