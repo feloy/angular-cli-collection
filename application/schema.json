@@ -77,7 +77,14 @@
     "material": {
       "description": "Should add Material design support.",
       "type": "boolean",
-      "default": false
+      "default": false,
+      "alias": "md"
+    },
+    "mdTheme": {
+      "description": "The Material theme to load.",
+      "enum": ["deeppurple-amber", "indigo-pink", "pink-bluegrey", "purple-green"],
+      "type": "string",
+      "default": "indigo-pink"
     }
   },
   "required": [
